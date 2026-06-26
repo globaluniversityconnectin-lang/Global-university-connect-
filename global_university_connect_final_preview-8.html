@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Global University Connect</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+:root{
+  --navy:#071f46;--deep:#04162f;--gold:#d4af37;--gold2:#ffcf55;--white:#fff;
+  --text:#1e1e1e;--muted:#666;--green:#19a15f;--red:#e63946;--blue:#1f6feb;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+html{scroll-behavior:smooth}
+body{background:#f6f7fb;color:var(--text)}
+a{text-decoration:none}
+.top-offer{
+  background:linear-gradient(90deg,#8b6508,#d4af37,#fff1a5,#d4af37,#8b6508);
+  color:#111;padding:11px 6%;text-align:center;font-weight:900;letter-spacing:.4px
+}
+.header{
+  background:rgba(7,31,70,.97);color:#fff;padding:16px 6%;display:flex;justify-content:space-between;
+  align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 8px 24px rgba(0,0,0,.22)
+}
+.logo-box{display:flex;align-items:center;gap:12px}
+.logo-icon{
+  width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#fff4bc,#d4af37,#8a6206);
+  display:flex;align-items:center;justify-content:center;font-weight:900;font-size:27px;color:#071f46;
+  box-shadow:0 0 22px rgba(255,207,85,.7)
+}
+.logo-text h1{font-size:25px;font-weight:900;letter-spacing:.3px}
+.logo-text p{font-size:12px;color:#ffd86b;font-weight:700}
+.nav a{color:#fff;margin:0 8px;font-size:13px;font-weight:800}
+.nav a:hover{color:#ffd86b}
+.call-btn{
+  background:linear-gradient(135deg,#fff1a5,#d4af37,#a97705);
+  color:#071f46;padding:12px 18px;border-radius:30px;font-weight:900
+}
+.hero{
+  min-height:760px;background:linear-gradient(110deg,rgba(4,22,47,.95) 0%,rgba(7,31,70,.9) 50%,rgba(7,31,70,.22) 100%),
+  url('https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=1600&q=80');
+  background-size:cover;background-position:center;color:#fff;display:flex;align-items:center;padding:80px 6%
+}
+.hero-content{max-width:850px}
+.hero-tag{
+  display:inline-block;padding:10px 18px;background:rgba(212,175,55,.18);color:#ffd86b;
+  border:1px solid rgba(212,175,55,.75);border-radius:30px;font-weight:900;margin-bottom:20px
+}
+.hero h2{font-size:62px;line-height:1.05;margin-bottom:18px;font-weight:900}
+.hero h2 span{color:#ffd86b;text-shadow:0 0 18px rgba(255,216,107,.45)}
+.hero p{font-size:19px;line-height:1.7;margin-bottom:26px;color:#f1f1f1}
+.hero-actions{display:flex;gap:15px;flex-wrap:wrap;margin-bottom:28px}
+.btn{border:none;padding:15px 24px;border-radius:13px;font-weight:900;cursor:pointer;display:inline-block;transition:.25s}
+.btn:hover{transform:translateY(-3px)}
+.btn-gold{background:linear-gradient(135deg,#fff1a5,#d4af37,#a97705);color:#071f46;box-shadow:0 8px 22px rgba(212,175,55,.4)}
+.btn-white{background:#fff;color:#071f46}
+.btn-green{background:#25d366;color:#fff}
+.hero-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;max-width:760px}
+.hero-stat{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);padding:18px;border-radius:16px;backdrop-filter:blur(10px)}
+.hero-stat h3{color:#ffd86b;font-size:30px}
+.hero-stat p{font-size:13px;margin:0}
+.search-panel{
+  margin:-70px auto 0;max-width:1200px;background:#fff;border-radius:24px;padding:26px;
+  box-shadow:0 20px 50px rgba(0,0,0,.16);position:relative;z-index:5;border:1px solid rgba(212,175,55,.5)
+}
+.search-title{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.search-title h2{color:#071f46;font-size:28px;font-weight:900}
+.search-title span{background:#fff5d2;color:#7a5600;padding:8px 13px;border-radius:30px;font-weight:900}
+.search-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto auto;gap:12px}
+.google-result-box{margin-top:18px;background:#f7fbff;border:1px solid #d9e7ff;padding:16px;border-radius:16px;display:none}
+.google-result-box h3{color:#071f46;margin-bottom:8px}
+.google-result-box p{color:#555;line-height:1.6;margin-bottom:12px}
+.google-result-box a{display:inline-block;background:#1a73e8;color:#fff;padding:12px 16px;border-radius:10px;font-weight:900}
+.online-course-section{background:linear-gradient(135deg,#071f46,#0f3d78);color:#fff}
+.online-course-section .section-head h2,.online-course-section .section-head p{color:#fff}
+.online-course-card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:22px;padding:24px;transition:.3s}
+.online-course-card:hover{transform:translateY(-7px);background:rgba(255,255,255,.15)}
+.online-course-card h3{color:#ffd86b;font-size:24px;margin-bottom:10px}
+.online-course-card p{line-height:1.7;color:#f1f1f1;margin-bottom:12px}
+.online-streams{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.online-streams span{background:rgba(255,216,107,.16);border:1px solid rgba(255,216,107,.35);color:#fff;padding:7px 10px;border-radius:20px;font-size:12px;font-weight:900}
+input,select,textarea{width:100%;padding:15px;border:1px solid #ddd;border-radius:12px;font-size:15px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,55,.18)}
+section{padding:70px 6%}
+.section-head{text-align:center;max-width:900px;margin:0 auto 40px}
+.section-head .mini{color:#a97705;font-weight:900;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+.section-head h2{font-size:40px;color:#071f46;font-weight:900;margin-bottom:12px}
+.section-head p{color:#666;line-height:1.7}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(275px,1fr));gap:24px}
+.card{
+  background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 10px 28px rgba(0,0,0,.08);
+  transition:.3s;border:1px solid rgba(212,175,55,.18)
+}
+.card:hover{transform:translateY(-7px);box-shadow:0 16px 38px rgba(0,0,0,.14)}
+.card-img{width:100%;height:190px;object-fit:cover}
+.card-body{padding:22px}
+.card-body h3{color:#071f46;font-size:21px;margin-bottom:10px;font-weight:900}
+.card-body p{color:#555;line-height:1.55;margin-bottom:8px;font-size:14px}
+.badge-row{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+.badge{background:#fff4cd;color:#7a5600;padding:7px 10px;border-radius:30px;font-size:12px;font-weight:900}
+.badge-green{background:#e7fff2;color:#087c43}
+.badge-red{background:#ffe8eb;color:#c1121f}
+.badge-blue{background:#eaf2ff;color:#1f6feb}
+.rating{color:#d49400;font-weight:900}
+.small-btn{padding:10px 13px;border-radius:10px;border:none;font-weight:900;cursor:pointer;font-size:13px;margin:3px}
+.small-gold{background:linear-gradient(135deg,#ffe58a,#d4af37,#a97705);color:#071f46}
+.small-navy{background:#071f46;color:#fff}
+.small-green{background:#25d366;color:#fff}
+.feature-box{
+  background:linear-gradient(135deg,#071f46,#0f3d78);color:#fff;padding:30px;border-radius:24px;
+  box-shadow:0 14px 30px rgba(0,0,0,.15)
+}
+.feature-box h3{color:#ffd86b;margin-bottom:10px;font-size:24px}
+.feature-box p{line-height:1.7}
+.clickable-feature{cursor:pointer;position:relative}
+.clickable-feature:after{content:"Click to Open";display:inline-block;margin-top:15px;background:linear-gradient(135deg,#fff1a5,#d4af37,#a97705);color:#071f46;padding:10px 14px;border-radius:30px;font-weight:900}
+.clickable-feature:hover{transform:translateY(-8px) scale(1.01)}
+.segment-tabs{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:30px}
+.segment-tabs button{
+  padding:12px 16px;border:none;border-radius:30px;background:#fff;border:1px solid rgba(212,175,55,.45);
+  color:#071f46;font-weight:900;cursor:pointer;box-shadow:0 5px 14px rgba(0,0,0,.06)
+}
+.segment-tabs button.active,.segment-tabs button:hover{
+  background:linear-gradient(135deg,#fff1a5,#d4af37,#a97705);color:#071f46
+}
+.course-segment-title{
+  background:linear-gradient(135deg,#071f46,#0f3d78);color:#fff;padding:22px;border-radius:20px;margin:35px 0 22px;
+  display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap
+}
+.course-segment-title h3{font-size:28px;color:#ffd86b}
+.course-card{
+  background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 10px 28px rgba(0,0,0,.08);
+  border:1px solid rgba(212,175,55,.18);transition:.3s
+}
+.course-card:hover{transform:translateY(-7px)}
+.course-card img{width:100%;height:185px;object-fit:cover}
+.course-card .course-content{padding:20px}
+.course-card h3{color:#071f46;font-size:21px;font-weight:900;margin-bottom:8px}
+.course-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.meta-box{background:#f8f4e8;padding:9px;border-radius:10px;font-size:13px;color:#5b4200}
+.detail-list{margin:10px 0 12px;padding-left:16px;color:#555;font-size:14px;line-height:1.6}
+.mode-section{
+  background:linear-gradient(rgba(7,31,70,.9),rgba(7,31,70,.9)),url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80');
+  background-size:cover;background-position:center;color:#fff
+}
+.mode-section .section-head h2,.mode-section .section-head p{color:#fff}
+.mode-card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:30px;border-radius:24px;backdrop-filter:blur(12px)}
+.mode-card h3{color:#ffd86b;margin-bottom:12px;font-size:26px}
+.counselling{background:linear-gradient(135deg,#fff5d2,#fff,#f7ecd0)}
+.counselling-box{
+  display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center;background:#fff;border-radius:28px;padding:35px;
+  box-shadow:0 18px 45px rgba(0,0,0,.12);border:1px solid rgba(212,175,55,.4)
+}
+.counselling-box img{width:100%;border-radius:24px;height:420px;object-fit:cover}
+.counselling-text h2{color:#071f46;font-size:42px;font-weight:900;margin-bottom:12px}
+.counselling-text h2 span{color:#c28d00}
+.counselling-text p{color:#555;line-height:1.7;margin-bottom:18px}
+.offer-strip{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}
+.offer-item{background:#fff2c2;color:#6b4b00;padding:11px 14px;border-radius:14px;font-weight:900}
+.forms-wrap{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.form-card{background:#fff;padding:28px;border-radius:24px;box-shadow:0 12px 32px rgba(0,0,0,.08);border:1px solid rgba(212,175,55,.22)}
+.form-card h3{color:#071f46;font-size:26px;margin-bottom:18px;font-weight:900}
+.form-card textarea{min-height:120px;resize:vertical}
+.address-box{
+  background:linear-gradient(135deg,#fff1c2,#fff,#f8e8b2);border:1px solid rgba(212,175,55,.5);border-radius:24px;
+  padding:28px;box-shadow:0 12px 28px rgba(0,0,0,.08)
+}
+.address-box h3{color:#071f46;font-size:28px;margin-bottom:12px}
+.address-box p{line-height:1.8;color:#444;font-size:16px}
+.social-contact{background:#071f46;color:#fff}
+.social-contact .section-head h2,.social-contact .section-head p{color:#fff}
+.social-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+.social-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);padding:24px;border-radius:22px;text-align:center;transition:.3s}
+.social-card:hover{transform:translateY(-5px);background:rgba(255,255,255,.13)}
+.social-card .icon{font-size:42px;margin-bottom:12px}
+.social-card h3{color:#ffd86b;margin-bottom:8px}
+.social-card a{color:#fff;font-weight:900}
+.footer{background:#04162f;color:#fff;padding:45px 6%}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:28px}
+.footer h3{color:#ffd86b;margin-bottom:15px}
+.footer p,.footer a{color:#d8d8d8;line-height:1.8;display:block}
+.footer-bottom{text-align:center;border-top:1px solid rgba(255,255,255,.12);margin-top:30px;padding-top:20px;color:#cfcfcf}
+.floating-whatsapp{
+  position:fixed;right:22px;bottom:22px;width:62px;height:62px;background:#25d366;color:white;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:33px;z-index:200;box-shadow:0 10px 25px rgba(0,0,0,.3)
+}
+.modal{
+  position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:300;display:none;align-items:center;justify-content:center;padding:18px
+}
+.modal-box{background:#fff;max-width:760px;width:100%;border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.modal-head{
+  background:linear-gradient(135deg,#071f46,#0f3d78);color:#fff;padding:20px;display:flex;justify-content:space-between;align-items:center
+}
+.modal-head h3{color:#ffd86b;font-size:25px}
+.modal-head button{background:none;border:none;color:#fff;font-size:28px;cursor:pointer}
+.modal-body{padding:24px}
+.modal-body p,.modal-body li{color:#555;line-height:1.7;margin-bottom:6px}
+.no-result{background:#fff;padding:35px;text-align:center;border-radius:20px;color:#071f46;font-weight:900;grid-column:1/-1}
+@media(max-width:1050px){
+  .nav{display:none}.search-grid{grid-template-columns:1fr 1fr}.counselling-box{grid-template-columns:1fr}
+  .forms-wrap{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:700px){
+  .header{flex-direction:column;text-align:center}.hero{min-height:auto;padding:70px 6%}.hero h2{font-size:38px}
+  .search-grid{grid-template-columns:1fr}.section-head h2{font-size:30px}.counselling-text h2{font-size:32px}
+  .footer-grid{grid-template-columns:1fr}.course-meta{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="top-offer">🎓 Admission Open 2026 | 1000+ Universities | 200+ Courses | Limited Seats | Free Counselling Call | Jagatpura, Jaipur 302017, Rajasthan</div>
+
+<header class="header">
+  <div class="logo-box">
+    <div class="logo-icon">G</div>
+    <div class="logo-text">
+      <h1>Global University Connect</h1>
+      <p>Future with Global University Connect</p>
+    </div>
+  </div>
+  <nav class="nav">
+    <a href="#home">Home</a><a href="#universities">Universities</a><a href="#courseSegments">Courses</a>
+    <a href="#onlineCourses">Online Courses</a><a href="#modes">Online/Offline</a><a href="#counselling">Free Counselling</a><a href="#admission">Admission</a><a href="#contact">Contact</a>
+  </nav>
+  <a class="call-btn" href="#counselling">Click Now</a>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-tag">India University Admission Guidance Platform</div>
+    <h2>Build Your <span>Future</span> with Global University Connect</h2>
+    <p>Discover Indian universities, explore Medical, Engineering, Management, IT, Law, Commerce, Arts and other courses, and get free counselling for online or offline admission.</p>
+    <div class="hero-actions">
+      <a href="#universities" class="btn btn-gold">Explore Universities</a>
+      <a href="#courseSegments" class="btn btn-white">Explore Courses</a>
+      <a href="#counselling" class="btn btn-gold">Get Free Counselling</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><h3 id="totalUniversitiesHero">1000+</h3><p>Indian Universities</p></div>
+      <div class="hero-stat"><h3 id="totalCoursesHero">200+</h3><p>Course Options</p></div>
+      <div class="hero-stat"><h3>Online</h3><p>Flexible Education</p></div>
+      <div class="hero-stat"><h3>Offline</h3><p>Campus Admission</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="search-panel">
+  <div class="search-title">
+    <h2>Search Indian Universities</h2>
+    <span>Admission Open • Limited Seats</span>
+  </div>
+  <div class="search-grid">
+    <input id="keyword" type="text" placeholder="Search university, city, course, state">
+    <select id="stateFilter"><option value="">All States</option></select>
+    <select id="typeFilter">
+      <option value="">All Types</option><option value="Central University">Central University</option>
+      <option value="State University">State University</option><option value="Private University">Private University</option>
+      <option value="Deemed University">Deemed University</option>
+    </select>
+    <select id="modeFilter">
+      <option value="">All Modes</option><option value="Online">Online</option><option value="Offline">Offline</option><option value="Online + Offline">Online + Offline</option>
+    </select>
+    <button class="btn btn-gold" onclick="searchUniversities()">Search</button>
+    <button class="btn btn-white" onclick="googleUniversitySearch()">Google</button>
+  </div>
+  <div class="google-result-box" id="googleResultBox">
+    <h3>Google University Search</h3>
+    <p id="googleResultText">Search university results on Google directly from here.</p>
+    <a id="googleResultLink" href="https://www.google.com/search?q=Indian+universities+admission" target="_blank">Open Google Results</a>
+  </div>
+</div>
+
+<section>
+  <div class="section-head">
+    <div class="mini">Why Students Choose Us</div>
+    <h2>Professional Admission Guidance for Indian Universities</h2>
+    <p>Global University Connect helps students find university, course, mode of study, admission process, counselling support, and direct contact from one platform.</p>
+  </div>
+  <div class="grid">
+    <div class="feature-box clickable-feature" onclick="openCourseSegments()">
+  <h3>All Major Course Segments</h3>
+  <p>Medical, Engineering, Management, Commerce, IT, Law, Arts, Design, Pharmacy, Nursing and 200+ course options. Click here to explore all courses with full details.</p>
+</div>
+    <div class="feature-box"><h3>Free Counselling Call</h3><p>Students can request a free counselling call for course guidance and university selection.</p></div>
+    <div class="feature-box"><h3>Online & Offline Education</h3><p>Choose campus learning, distance learning, online classes or blended mode.</p></div>
+    <div class="feature-box"><h3>WhatsApp Popup Support</h3><p>Students can directly connect via WhatsApp for every course and admission enquiry.</p></div>
+  </div>
+</section>
+
+<section id="universities">
+  <div class="section-head">
+    <div class="mini">India Universities</div>
+    <h2>Explore Indian Universities with Details & Photos</h2>
+    <p>Professional university listing cards with details, courses, admission status, online/offline mode and free counselling CTA.</p>
+  </div>
+  <div class="grid" id="universityList"></div>
+</section>
+
+<section id="courseSegments">
+  <div class="section-head">
+    <div class="mini">All Course Segments</div>
+    <h2>Explore Courses by Segment with Full Details</h2>
+    <p>Choose a segment below. Every course card includes duration, eligibility, mode, career options, detail button and WhatsApp counselling.</p>
+  </div>
+
+  <div class="segment-tabs" id="segmentTabs"></div>
+  <div id="courseSegmentContainer"></div>
+</section>
+
+
+<section class="online-course-section" id="onlineCourses">
+  <div class="section-head">
+    <div class="mini">Click to Open</div>
+    <h2>Online Courses Admission Open</h2>
+    <p>Explore flexible online courses for students who want to study from home with university guidance, admission support and counselling.</p>
+  </div>
+  <div class="grid" id="onlineCourseList"></div>
+</section>
+
+<section class="mode-section" id="modes">
+  <div class="section-head">
+    <div class="mini">Study Modes</div>
+    <h2>Online and Offline Education Options</h2>
+    <p>Students can choose flexible online education or full campus-based offline education.</p>
+  </div>
+  <div class="grid">
+    <div class="mode-card"><h3>Online Education</h3><p>Flexible learning, recorded classes, live sessions, digital notes and study from home options.</p><br><a href="#counselling" class="btn btn-gold">Ask for Online Courses</a></div>
+    <div class="mode-card"><h3>Offline Education</h3><p>Campus life, classroom learning, labs, hostel facilities and direct university exposure.</p><br><a href="#counselling" class="btn btn-gold">Ask for Offline Admission</a></div>
+    <div class="mode-card"><h3>Hybrid Education</h3><p>Online + offline support with flexible classes, weekend sessions, counselling and exam support.</p><br><a href="#counselling" class="btn btn-gold">Explore Hybrid Mode</a></div>
+  </div>
+</section>
+
+<section class="counselling" id="counselling">
+  <div class="counselling-box">
+    <div class="counselling-text">
+      <div class="mini">Free Student Support</div>
+      <h2>Book Your <span>Free Counselling Call</span> Today</h2>
+      <p>Confused about course, university, online/offline mode or admission process? Fill the form and our counselling team will guide you.</p>
+      <div class="offer-strip">
+        <div class="offer-item">Admission Open</div><div class="offer-item">Limited Seats</div><div class="offer-item">Scholarship Guidance</div><div class="offer-item">Free Call</div>
+      </div>
+      <form onsubmit="submitCounselling(event)">
+        <input required placeholder="Student Name">
+        <input required type="tel" placeholder="Phone Number">
+        <select required><option value="">Interested Segment</option><option>Medical</option><option>Engineering</option><option>Management</option><option>Commerce</option><option>IT & Computer</option><option>Law</option><option>Arts</option><option>Design</option></select>
+        <select required><option value="">Interested Mode</option><option>Online Education</option><option>Offline Education</option><option>Online + Offline</option></select>
+        <button class="btn btn-gold" type="submit">Click Now - Free Counselling Call</button>
+      </form>
+    </div>
+    <img src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=900&q=80" alt="Happy students">
+  </div>
+</section>
+
+<section id="admission">
+  <div class="section-head">
+    <div class="mini">Apply Now</div>
+    <h2>Admission Form</h2>
+    <p>Students can submit admission interest details from here.</p>
+  </div>
+  <div class="forms-wrap">
+    <div class="form-card">
+      <h3>Student Admission Enquiry</h3>
+      <form onsubmit="submitAdmission(event)">
+        <input required placeholder="Full Name">
+        <input required type="email" placeholder="Email Address">
+        <input required type="tel" placeholder="Phone Number">
+        <select required id="admissionCourseSelect"><option value="">Preferred Course</option></select>
+        <select required><option value="">Preferred Education Mode</option><option>Online</option><option>Offline</option><option>Online + Offline</option></select>
+        <input placeholder="Preferred University">
+        <textarea placeholder="Message"></textarea>
+        <button class="btn btn-gold">Submit Admission Form</button>
+      </form>
+    </div>
+    <div class="address-box">
+      <h3>Office Address</h3>
+      <p><b>Global University Connect</b></p>
+      <p>Jagatpura, Jaipur - 302017</p>
+      <p>Rajasthan, India</p>
+      <p><b>Phone:</b> +91 9351401624</p>
+      <p><b>Email:</b> globaluniversityconnectin@gmail.com</p>
+      <br>
+      <button class="btn btn-green" onclick="directWhatsApp('Admission Counselling')">Chat on Ask Counsellor</button>
+    </div>
+  </div>
+</section>
+
+<section class="social-contact" id="contact">
+  <div class="section-head">
+    <div class="mini">Direct Contact</div>
+    <h2>Connect with Global University Connect</h2>
+    <p>Students can contact directly through WhatsApp, Instagram, Facebook, Email, Call or office address.</p>
+  </div>
+  <div class="social-grid">
+    <div class="social-card"><div class="icon">💬</div><h3>WhatsApp</h3><p>Chat for free counselling</p><a href="https://wa.me/919351401624" target="_blank">Open WhatsApp</a></div>
+    <div class="social-card"><div class="icon">📸</div><h3>Instagram</h3><p>Follow admission updates</p><a href="https://instagram.com/" target="_blank">Open Instagram</a></div>
+    <div class="social-card"><div class="icon">📘</div><h3>Facebook</h3><p>Join our student community</p><a href="https://facebook.com/" target="_blank">Open Facebook</a></div>
+    <div class="social-card"><div class="icon">📞</div><h3>Call</h3><p>Speak with counsellor</p><a href="tel:+919351401624">Call Now</a></div>
+    <div class="social-card"><div class="icon">📍</div><h3>Address</h3><p>Jagatpura, Jaipur 302017, Rajasthan</p><a href="#admission">View Address</a></div>
+  
+    <div class="social-card"><div class="icon">✉️</div><h3>Email</h3><p>Send admission query</p><a href="mailto:globaluniversityconnectin@gmail.com">Email Now</a></div></div>
+</section>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div><h3>Global University Connect</h3><p>Future with Global University Connect. We help students explore Indian universities, courses, online/offline education and admission guidance.</p></div>
+    <div><h3>Quick Links</h3><a href="#home">Home</a><a href="#universities">Universities</a><a href="#courseSegments">Courses</a><a href="#counselling">Free Counselling</a><a href="#admission">Admission</a></div>
+    <div><h3>Course Segments</h3><a>Medical</a><a>Engineering</a><a>Management</a><a>Commerce</a><a>IT & Computer</a><a>Law</a></div>
+    <div><h3>Contact</h3><p>Address: Jagatpura, Jaipur 302017, Rajasthan</p><p>Phone: +91 9351401624</p><p>Email: globaluniversityconnectin@gmail.com</p><p>WhatsApp: +91 9351401624</p></div>
+  </div>
+  <div class="footer-bottom">© 2026 Global University Connect. All Rights Reserved.</div>
+</footer>
+
+<a class="floating-whatsapp" href="https://wa.me/919351401624?text=Hello%20Global%20University%20Connect%2C%20I%20want%20free%20counselling%20for%20admission." target="_blank">💬</a>
+
+<div class="modal" id="courseModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="modalCourseName">Course Detail</h3>
+      <button onclick="closeCourseModal()">×</button>
+    </div>
+    <div class="modal-body" id="modalCourseBody"></div>
+  </div>
+</div>
+
+<script>
+const whatsappNumber = "919351401624";
+
+const photos=[
+"https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=900&q=80",
+"https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=900&q=80",
+"https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=900&q=80",
+"https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?auto=format&fit=crop&w=900&q=80",
+"https://images.unsplash.com/photo-1519452575417-564c1401ecc0?auto=format&fit=crop&w=900&q=80",
+"https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=900&q=80"
+];
+
+let universities=[
+{name:"University of Delhi",state:"Delhi",city:"New Delhi",type:"Central University",mode:"Online + Offline",courses:["BA","B.Com","B.Sc","MA","MBA"],rating:"4.6",photo:photos[0]},
+{name:"Jawaharlal Nehru University",state:"Delhi",city:"New Delhi",type:"Central University",mode:"Offline",courses:["BA","MA","M.Sc","PhD"],rating:"4.7",photo:photos[1]},
+{name:"Banaras Hindu University",state:"Uttar Pradesh",city:"Varanasi",type:"Central University",mode:"Online + Offline",courses:["BA","B.Sc","B.Tech","MBA","Medical"],rating:"4.7",photo:photos[2]},
+{name:"University of Mumbai",state:"Maharashtra",city:"Mumbai",type:"State University",mode:"Online + Offline",courses:["BA","B.Com","BMS","B.Sc"],rating:"4.4",photo:photos[3]},
+{name:"University of Calcutta",state:"West Bengal",city:"Kolkata",type:"State University",mode:"Offline",courses:["BA","B.Sc","B.Com","Law"],rating:"4.5",photo:photos[4]},
+{name:"Anna University",state:"Tamil Nadu",city:"Chennai",type:"State University",mode:"Offline",courses:["B.Tech","M.Tech","MBA","MCA"],rating:"4.5",photo:photos[5]},
+{name:"Savitribai Phule Pune University",state:"Maharashtra",city:"Pune",type:"State University",mode:"Online + Offline",courses:["BA","B.Sc","B.Com","MBA","MCA"],rating:"4.5",photo:photos[0]},
+{name:"University of Hyderabad",state:"Telangana",city:"Hyderabad",type:"Central University",mode:"Offline",courses:["MA","M.Sc","MCA","MBA"],rating:"4.6",photo:photos[1]},
+{name:"Osmania University",state:"Telangana",city:"Hyderabad",type:"State University",mode:"Online + Offline",courses:["BA","B.Com","B.Sc","MBA","Law"],rating:"4.3",photo:photos[2]},
+{name:"Panjab University",state:"Chandigarh",city:"Chandigarh",type:"State University",mode:"Offline",courses:["BA","B.Com","B.Sc","MBA","Law"],rating:"4.5",photo:photos[3]},
+{name:"Jamia Millia Islamia",state:"Delhi",city:"New Delhi",type:"Central University",mode:"Offline",courses:["BA","B.Tech","B.Arch","MBA","Law"],rating:"4.6",photo:photos[4]},
+{name:"Aligarh Muslim University",state:"Uttar Pradesh",city:"Aligarh",type:"Central University",mode:"Offline",courses:["BA","B.Sc","B.Com","Engineering","Medical"],rating:"4.6",photo:photos[5]},
+{name:"Vellore Institute of Technology",state:"Tamil Nadu",city:"Vellore",type:"Private University",mode:"Online + Offline",courses:["B.Tech","M.Tech","MBA","MCA"],rating:"4.5",photo:photos[3]},
+{name:"Amity University",state:"Uttar Pradesh",city:"Noida",type:"Private University",mode:"Online + Offline",courses:["BBA","MBA","B.Tech","Law","Design"],rating:"4.2",photo:photos[5]},
+{name:"Chandigarh University",state:"Punjab",city:"Mohali",type:"Private University",mode:"Online + Offline",courses:["B.Tech","MBA","BBA","BCA","Law"],rating:"4.3",photo:photos[0]},
+{name:"Lovely Professional University",state:"Punjab",city:"Phagwara",type:"Private University",mode:"Online + Offline",courses:["B.Tech","MBA","BBA","BCA","Design"],rating:"4.3",photo:photos[1]},
+{name:"Symbiosis International University",state:"Maharashtra",city:"Pune",type:"Deemed University",mode:"Online + Offline",courses:["MBA","BBA","Law","Design","IT"],rating:"4.5",photo:photos[2]},
+{name:"Christ University",state:"Karnataka",city:"Bengaluru",type:"Deemed University",mode:"Online + Offline",courses:["BBA","B.Com","BA","MBA","Law"],rating:"4.4",photo:photos[4]}
+];
+
+const courseImages = {
+Medical:"https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&w=900&q=80",
+Engineering:"https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=900&q=80",
+Management:"https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80",
+Commerce:"https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=900&q=80",
+"IT & Computer":"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80",
+Law:"https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=900&q=80",
+Arts:"https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=900&q=80",
+Design:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80",
+Pharmacy:"https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=900&q=80",
+Nursing:"https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=900&q=80",
+Education:"https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80",
+Agriculture:"https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=80",
+"Hotel & Tourism":"https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?auto=format&fit=crop&w=900&q=80",
+"Media & Journalism":"https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=900&q=80"
+};
+
+const courseSegments = {
+"Medical":[
+{name:"MBBS",duration:"5.5 Years",eligibility:"10+2 PCB + NEET",mode:"Offline",career:"Doctor, Medical Officer, Surgeon Pathway",details:["Bachelor of Medicine and Bachelor of Surgery.","Best for students who want to become doctors.","Requires entrance eligibility and medical counselling process."]},
+{name:"BDS",duration:"5 Years",eligibility:"10+2 PCB + NEET",mode:"Offline",career:"Dentist, Dental Surgeon, Clinic Owner",details:["Dental surgery degree focused on oral health.","Includes clinical practice and dental procedures.","Good for healthcare and private clinic career."]},
+{name:"BAMS",duration:"5.5 Years",eligibility:"10+2 PCB + NEET",mode:"Offline",career:"Ayurvedic Doctor, Wellness Consultant",details:["Ayurvedic medicine and surgery course.","Covers traditional medicine, diagnosis and treatment.","Useful for Ayurveda hospital and wellness sector."]},
+{name:"BHMS",duration:"5.5 Years",eligibility:"10+2 PCB + NEET",mode:"Offline",career:"Homeopathic Doctor, Consultant",details:["Homeopathy medicine course.","Includes homeopathic pharmacy, medicine and clinical training.","Good for homeopathic practice and healthcare service."]},
+{name:"BPT",duration:"4.5 Years",eligibility:"10+2 PCB",mode:"Offline",career:"Physiotherapist, Rehab Specialist",details:["Physiotherapy course for movement, injury and rehabilitation.","Useful in hospitals, sports clinics and wellness centres.","Strong career in rehabilitation and patient care."]},
+{name:"B.Sc Radiology",duration:"3 Years",eligibility:"10+2 Science",mode:"Offline",career:"Radiology Technician, Imaging Specialist",details:["Medical imaging course.","Covers X-ray, CT, MRI and diagnostic imaging basics.","Good for hospital diagnostic departments."]},
+{name:"BMLT",duration:"3 Years",eligibility:"10+2 Science",mode:"Offline",career:"Lab Technician, Pathology Assistant",details:["Medical lab technology course.","Covers pathology, testing and laboratory procedures.","Useful in hospitals and diagnostic labs."]},
+{name:"B.Sc Optometry",duration:"4 Years",eligibility:"10+2 Science",mode:"Offline",career:"Optometrist, Eye Care Specialist",details:["Eye care and vision testing course.","Covers lenses, eye exams and optical care.","Good for eye clinics and optical business."]}
+],
+"Engineering":[
+{name:"B.Tech Computer Science",duration:"4 Years",eligibility:"10+2 PCM",mode:"Online + Offline",career:"Software Engineer, Developer, AI Engineer",details:["Popular engineering branch for coding and technology.","Covers programming, data structures, AI, cloud and software.","Good for IT companies and startups."]},
+{name:"B.Tech Mechanical Engineering",duration:"4 Years",eligibility:"10+2 PCM",mode:"Offline",career:"Mechanical Engineer, Design Engineer",details:["Focuses on machines, manufacturing, engines and design.","Useful for automobile, production and industrial sector.","Includes workshops and practical labs."]},
+{name:"B.Tech Civil Engineering",duration:"4 Years",eligibility:"10+2 PCM",mode:"Offline",career:"Civil Engineer, Site Engineer",details:["Construction, buildings, roads, bridges and planning.","Good for infrastructure and real estate projects.","Includes surveying, design and structure study."]},
+{name:"B.Tech Electrical Engineering",duration:"4 Years",eligibility:"10+2 PCM",mode:"Offline",career:"Electrical Engineer, Power Engineer",details:["Power systems, machines, circuits and energy.","Useful in power plants, electrical companies and automation.","Strong technical branch for core engineering."]},
+{name:"B.Tech Electronics & Communication",duration:"4 Years",eligibility:"10+2 PCM",mode:"Offline",career:"ECE Engineer, Telecom Engineer",details:["Electronics, communication, circuits and embedded systems.","Good for telecom, semiconductor and electronics industries.","Includes signal systems and hardware learning."]},
+{name:"B.Tech AI & ML",duration:"4 Years",eligibility:"10+2 PCM",mode:"Online + Offline",career:"AI Engineer, ML Developer, Data Scientist",details:["Modern branch focused on artificial intelligence.","Covers machine learning, Python, data and automation.","High-demand technology career option."]},
+{name:"M.Tech",duration:"2 Years",eligibility:"B.Tech/BE",mode:"Offline",career:"Specialist Engineer, Research, Faculty",details:["Postgraduate engineering specialization.","Useful for research, technical leadership and teaching.","Available in many engineering branches."]},
+{name:"Diploma Engineering",duration:"3 Years",eligibility:"10th/12th",mode:"Offline",career:"Junior Engineer, Technician",details:["Technical diploma after school.","Good for early technical career and lateral entry options.","Branches include civil, mechanical, electrical and computer."]}
+],
+"Management":[
+{name:"MBA",duration:"2 Years",eligibility:"Graduation",mode:"Online + Offline",career:"Manager, HR, Marketing, Finance, Entrepreneur",details:["Master of Business Administration.","Covers business strategy, finance, marketing, HR and operations.","Good for corporate and leadership career."]},
+{name:"BBA",duration:"3 Years",eligibility:"10+2",mode:"Online + Offline",career:"Business Executive, Manager Trainee",details:["Bachelor of Business Administration.","Builds management, communication and business foundation.","Good before MBA and corporate jobs."]},
+{name:"PGDM",duration:"2 Years",eligibility:"Graduation",mode:"Offline",career:"Management Professional, Consultant",details:["Postgraduate diploma in management.","Industry-focused management programme.","Popular among business schools."]},
+{name:"BMS",duration:"3 Years",eligibility:"10+2",mode:"Offline",career:"Management Executive, Analyst",details:["Bachelor of Management Studies.","Covers management, economics, marketing and finance.","Useful for business-oriented students."]},
+{name:"MBA Finance",duration:"2 Years",eligibility:"Graduation",mode:"Online + Offline",career:"Financial Analyst, Banker, Investment Manager",details:["Specialized MBA for finance and investment.","Covers banking, accounting, markets and financial planning.","Good for finance sector career."]},
+{name:"MBA Marketing",duration:"2 Years",eligibility:"Graduation",mode:"Online + Offline",career:"Marketing Manager, Brand Manager",details:["Specialized MBA for sales and marketing.","Covers branding, digital marketing, consumer behaviour and strategy.","Good for sales, advertising and brand roles."]}
+],
+"Commerce":[
+{name:"B.Com",duration:"3 Years",eligibility:"10+2",mode:"Online + Offline",career:"Accountant, Banker, Tax Assistant",details:["Commerce graduation course.","Covers accounting, business law, economics and taxation.","Good for CA, CS, banking and finance preparation."]},
+{name:"M.Com",duration:"2 Years",eligibility:"B.Com/Graduation",mode:"Online + Offline",career:"Lecturer, Accountant, Finance Executive",details:["Postgraduate commerce course.","Useful for advanced accounting and commerce knowledge.","Good for teaching and finance roles."]},
+{name:"CA Foundation Pathway",duration:"Varies",eligibility:"10+2",mode:"Online + Offline",career:"Chartered Accountant",details:["Professional accounting career pathway.","Requires clearing CA exams stage-wise.","Good for taxation, audit and finance career."]},
+{name:"CS Foundation Pathway",duration:"Varies",eligibility:"10+2",mode:"Online + Offline",career:"Company Secretary",details:["Professional corporate law and compliance pathway.","Good for company law, governance and secretarial work.","Requires exam-based progression."]},
+{name:"B.Com Honours",duration:"3 Years",eligibility:"10+2 Commerce",mode:"Offline",career:"Finance Analyst, Accountant",details:["Advanced commerce degree.","Strong focus on accounting, finance and taxation.","Popular for commerce students."]},
+{name:"Banking & Finance",duration:"1-3 Years",eligibility:"10+2/Graduation",mode:"Online + Offline",career:"Banker, Finance Executive",details:["Skill-focused course for banking and finance industry.","Covers banking operations, finance and customer handling.","Good for private banking and finance roles."]}
+],
+"IT & Computer":[
+{name:"BCA",duration:"3 Years",eligibility:"10+2",mode:"Online + Offline",career:"Software Developer, Web Developer",details:["Bachelor of Computer Applications.","Covers programming, database, web development and software basics.","Good for IT career and MCA preparation."]},
+{name:"MCA",duration:"2 Years",eligibility:"Graduation/BCA",mode:"Online + Offline",career:"Software Engineer, System Analyst",details:["Master of Computer Applications.","Advanced programming, software engineering and IT systems.","Good for professional software roles."]},
+{name:"B.Sc IT",duration:"3 Years",eligibility:"10+2",mode:"Online + Offline",career:"IT Support, Developer, Analyst",details:["Information technology graduation course.","Covers networking, database, coding and IT management.","Good for tech support and software careers."]},
+{name:"Data Science",duration:"6 Months-3 Years",eligibility:"10+2/Graduation",mode:"Online + Offline",career:"Data Analyst, Data Scientist",details:["Modern course focused on data, statistics and analytics.","Covers Python, SQL, visualization and machine learning basics.","High demand in tech and business sectors."]},
+{name:"Cyber Security",duration:"6 Months-3 Years",eligibility:"10+2/Graduation",mode:"Online + Offline",career:"Cyber Security Analyst",details:["Focuses on network security and ethical hacking basics.","Covers threats, protection, cyber laws and tools.","Good for IT security career."]},
+{name:"AI & Machine Learning",duration:"6 Months-4 Years",eligibility:"10+2/Graduation",mode:"Online + Offline",career:"AI Developer, ML Engineer",details:["Artificial intelligence and machine learning course.","Covers Python, algorithms, model training and automation.","Fast-growing technology career option."]}
+],
+"Law":[
+{name:"LLB",duration:"3 Years",eligibility:"Graduation",mode:"Offline",career:"Lawyer, Legal Advisor",details:["Bachelor of Laws after graduation.","Covers legal system, criminal law, civil law and constitutional law.","Good for legal practice and judiciary preparation."]},
+{name:"BA LLB",duration:"5 Years",eligibility:"10+2",mode:"Offline",career:"Advocate, Legal Consultant",details:["Integrated law course after 12th.","Combines arts subjects with legal education.","Popular for students who want law after school."]},
+{name:"BBA LLB",duration:"5 Years",eligibility:"10+2",mode:"Offline",career:"Corporate Lawyer, Legal Manager",details:["Integrated business and law course.","Useful for corporate law, compliance and business law.","Good for corporate legal career."]},
+{name:"LLM",duration:"1-2 Years",eligibility:"LLB",mode:"Offline",career:"Legal Specialist, Academic, Research",details:["Postgraduate law course.","Specializations include criminal, corporate, constitutional and international law.","Useful for advanced legal expertise."]},
+{name:"Cyber Law",duration:"6 Months-1 Year",eligibility:"10+2/Graduation",mode:"Online + Offline",career:"Cyber Law Consultant",details:["Covers digital crimes, privacy, cyber regulations and online legal issues.","Useful for IT and legal professionals.","Growing area due to digital business."]}
+],
+"Arts":[
+{name:"BA",duration:"3 Years",eligibility:"10+2",mode:"Online + Offline",career:"Civil Services, Teaching, Content, Social Work",details:["Bachelor of Arts in humanities and social sciences.","Subjects include history, political science, sociology, English and psychology.","Good for government exam preparation and higher studies."]},
+{name:"MA",duration:"2 Years",eligibility:"Graduation",mode:"Online + Offline",career:"Teacher, Researcher, Writer",details:["Master of Arts for advanced humanities study.","Useful for teaching, research and academic career.","Available in many specializations."]},
+{name:"BA Psychology",duration:"3 Years",eligibility:"10+2",mode:"Online + Offline",career:"Counselling Pathway, HR, Research",details:["Focuses on human behaviour and mental processes.","Useful for counselling, HR and research pathways.","Higher study is important for professional psychology practice."]},
+{name:"BA English",duration:"3 Years",eligibility:"10+2",mode:"Online + Offline",career:"Writer, Teacher, Editor",details:["English literature and language course.","Good for content writing, teaching and communication careers.","Useful for media and publishing roles."]},
+{name:"Social Work",duration:"3 Years",eligibility:"10+2",mode:"Offline",career:"Social Worker, NGO Professional",details:["Focuses on community work, welfare and development.","Good for NGO, CSR and public welfare sector.","Includes field work and social research."]}
+],
+"Design":[
+{name:"B.Des Fashion Design",duration:"4 Years",eligibility:"10+2",mode:"Offline",career:"Fashion Designer, Stylist, Merchandiser",details:["Fashion design course for clothing, styling and textile design.","Includes sketching, garment construction and portfolio development.","Good for fashion brands and design studios."]},
+{name:"B.Des Graphic Design",duration:"4 Years",eligibility:"10+2",mode:"Online + Offline",career:"Graphic Designer, Brand Designer",details:["Visual communication, branding and digital design course.","Covers typography, layouts, digital tools and portfolio.","Good for agencies, brands and freelancing."]},
+{name:"Interior Design",duration:"1-4 Years",eligibility:"10+2",mode:"Online + Offline",career:"Interior Designer, Space Planner",details:["Space planning, materials, furniture and design aesthetics.","Good for home, office and retail interior projects.","Includes practical design portfolio."]},
+{name:"Animation & VFX",duration:"1-3 Years",eligibility:"10+2",mode:"Online + Offline",career:"Animator, VFX Artist",details:["Creative course for animation, visual effects and motion graphics.","Good for films, gaming, advertising and digital media.","Requires creative portfolio and software practice."]}
+],
+"Pharmacy":[
+{name:"B.Pharm",duration:"4 Years",eligibility:"10+2 PCB/PCM",mode:"Offline",career:"Pharmacist, Drug Inspector Pathway",details:["Bachelor of Pharmacy course.","Covers medicines, drug formulation, pharmacy practice and chemistry.","Good for pharma industry and pharmacy career."]},
+{name:"D.Pharm",duration:"2 Years",eligibility:"10+2 Science",mode:"Offline",career:"Pharmacist Assistant, Medical Store",details:["Diploma in Pharmacy.","Useful for entry into pharmacy practice.","Covers basic drug knowledge and pharmacy operations."]},
+{name:"M.Pharm",duration:"2 Years",eligibility:"B.Pharm",mode:"Offline",career:"Pharma Research, Quality Control",details:["Postgraduate pharmacy course.","Specializations include pharmaceutics, pharmacology and quality assurance.","Good for pharma research and industry roles."]}
+],
+"Nursing":[
+{name:"B.Sc Nursing",duration:"4 Years",eligibility:"10+2 PCB",mode:"Offline",career:"Staff Nurse, Hospital Nurse",details:["Professional nursing degree.","Covers patient care, medical-surgical nursing and community health.","Good demand in hospitals and healthcare."]},
+{name:"GNM",duration:"3 Years",eligibility:"10+2",mode:"Offline",career:"General Nurse, Midwife",details:["General Nursing and Midwifery course.","Practical nursing programme for hospital service.","Good for patient care career."]},
+{name:"ANM",duration:"2 Years",eligibility:"10+2",mode:"Offline",career:"Auxiliary Nurse, Health Worker",details:["Auxiliary Nursing and Midwifery course.","Focuses on basic nursing and community health.","Useful for primary healthcare support."]}
+],
+"Education":[
+{name:"B.Ed",duration:"2 Years",eligibility:"Graduation",mode:"Online + Offline",career:"Teacher, School Educator",details:["Bachelor of Education for teaching career.","Required for many school teaching roles.","Covers pedagogy, classroom management and teaching methods."]},
+{name:"M.Ed",duration:"2 Years",eligibility:"B.Ed",mode:"Offline",career:"Senior Teacher, Education Researcher",details:["Master of Education for advanced teaching and academic leadership.","Useful for education administration and research.","Good for higher-level education roles."]},
+{name:"D.El.Ed",duration:"2 Years",eligibility:"10+2",mode:"Offline",career:"Primary Teacher",details:["Diploma in Elementary Education.","Focused on primary school teaching.","Good for early teaching career."]}
+],
+"Agriculture":[
+{name:"B.Sc Agriculture",duration:"4 Years",eligibility:"10+2 Science/Agriculture",mode:"Offline",career:"Agriculture Officer, Farm Manager",details:["Agriculture science course.","Covers soil, crops, farming systems, agribusiness and technology.","Good for agri sector and government jobs."]},
+{name:"Agribusiness Management",duration:"2-3 Years",eligibility:"10+2/Graduation",mode:"Online + Offline",career:"Agribusiness Manager",details:["Combines agriculture with business management.","Good for food, farming and agri startup sector.","Covers supply chain and rural markets."]},
+{name:"Horticulture",duration:"3-4 Years",eligibility:"10+2 Science",mode:"Offline",career:"Horticulture Officer, Nursery Manager",details:["Study of fruits, vegetables, flowers and plantation crops.","Useful for farming, nursery and landscaping businesses.","Includes practical crop management."]}
+],
+"Hotel & Tourism":[
+{name:"Hotel Management",duration:"3-4 Years",eligibility:"10+2",mode:"Offline",career:"Hotel Manager, Front Office, F&B",details:["Hospitality course for hotel and service industry.","Covers front office, housekeeping, food production and service.","Good for hotels, resorts and airlines."]},
+{name:"Travel & Tourism",duration:"1-3 Years",eligibility:"10+2",mode:"Online + Offline",career:"Travel Consultant, Tour Manager",details:["Tourism and travel management course.","Covers tour planning, ticketing and destination management.","Good for travel agencies and tourism companies."]},
+{name:"Culinary Arts",duration:"1-3 Years",eligibility:"10+2",mode:"Offline",career:"Chef, Bakery Specialist",details:["Food production and professional cooking course.","Includes bakery, kitchen operations and culinary skills.","Good for restaurants, hotels and food business."]}
+],
+"Media & Journalism":[
+{name:"BJMC",duration:"3 Years",eligibility:"10+2",mode:"Online + Offline",career:"Journalist, Anchor, Content Creator",details:["Bachelor of Journalism and Mass Communication.","Covers media writing, reporting, video, PR and advertising.","Good for media and digital communication career."]},
+{name:"MJMC",duration:"2 Years",eligibility:"Graduation",mode:"Online + Offline",career:"Media Specialist, Editor, PR Manager",details:["Master of Journalism and Mass Communication.","Advanced media, communication and public relations study.","Good for senior media roles."]},
+{name:"Digital Marketing",duration:"3-12 Months",eligibility:"10+2/Graduation",mode:"Online + Offline",career:"Digital Marketer, SEO Executive",details:["Skill course for online marketing.","Covers social media, ads, SEO, content and analytics.","Useful for business promotion and freelancing."]}
+]
+};
+
+let filtered=[...universities];
+let currentSegment = "All";
+
+function fillStateFilter(){
+ const stateFilter=document.getElementById("stateFilter");
+ [...new Set(universities.map(u=>u.state))].sort().forEach(s=>stateFilter.innerHTML+=`<option value="${s}">${s}</option>`);
+}
+
+function displayUniversities(){
+ const list=document.getElementById("universityList"); list.innerHTML="";
+ if(filtered.length===0){list.innerHTML='<div class="no-result">No university found. Try another search.</div>';return;}
+ filtered.forEach(u=>{
+  list.innerHTML+=`
+  <div class="card">
+    <img class="card-img" src="${u.photo}" alt="${u.name}">
+    <div class="card-body">
+      <h3>${u.name}</h3>
+      <p><b>Location:</b> ${u.city}, ${u.state}</p>
+      <p><b>Type:</b> ${u.type}</p>
+      <p><b>Education Mode:</b> ${u.mode}</p>
+      <p><b>Courses:</b> ${u.courses.join(", ")}</p>
+      <p>Indian university option for admission guidance, online/offline study options and career counselling support.</p>
+      <p class="rating">⭐ ${u.rating}/5 Student Interest Rating</p>
+      <div class="badge-row"><span class="badge badge-green">Admission Open</span><span class="badge badge-red">Limited Seats</span><span class="badge badge-blue">Free Counselling</span></div>
+      <button class="small-btn small-gold" onclick="quickApply('${u.name}')">Apply Now</button>
+      <button class="small-btn small-green" onclick="directWhatsApp('${u.name}')">Ask Counsellor</button>
+    </div>
+  </div>`;
+ });
+ document.getElementById("totalUniversitiesHero").innerText="1000+";
+}
+
+function searchUniversities(){
+ const keyword=document.getElementById("keyword").value.toLowerCase();
+ const state=document.getElementById("stateFilter").value;
+ const type=document.getElementById("typeFilter").value;
+ const mode=document.getElementById("modeFilter").value;
+ filtered=universities.filter(u=>(
+  (u.name.toLowerCase().includes(keyword)||u.state.toLowerCase().includes(keyword)||u.city.toLowerCase().includes(keyword)||u.type.toLowerCase().includes(keyword)||u.mode.toLowerCase().includes(keyword)||u.courses.join(" ").toLowerCase().includes(keyword)) &&
+  (state===""||u.state===state) && (type===""||u.type===type) && (mode===""||u.mode===mode)
+ ));
+ displayUniversities();
+}
+
+function renderSegmentTabs(){
+ const tabs=document.getElementById("segmentTabs");
+ let segments=["All",...Object.keys(courseSegments)];
+ tabs.innerHTML="";
+ segments.forEach(seg=>{
+  tabs.innerHTML+=`<button class="${seg===currentSegment?'active':''}" onclick="selectSegment('${seg}')">${seg}</button>`;
+ });
+}
+
+function selectSegment(seg){
+ currentSegment=seg;
+ renderSegmentTabs();
+ renderCourses();
+}
+
+function renderCourses(){
+ const container=document.getElementById("courseSegmentContainer");
+ container.innerHTML="";
+ let segments = currentSegment==="All" ? Object.keys(courseSegments) : [currentSegment];
+ let totalCourses=0;
+
+ segments.forEach(segment=>{
+  let courses=courseSegments[segment];
+  totalCourses += courses.length;
+  container.innerHTML+=`
+    <div class="course-segment-title">
+      <div>
+        <h3>${segment} Courses</h3>
+        <p>${courses.length} course options available with admission support</p>
+      </div>
+      <button class="btn btn-gold" onclick="openSegmentOnly('${segment}')">Open ${segment} Courses</button>
+    </div>
+    <div class="grid">
+      ${courses.map((c,index)=>courseCardHTML(c,segment,index)).join("")}
+    </div>
+  `;
+ });
+
+ let allCount=Object.values(courseSegments).reduce((sum,arr)=>sum+arr.length,0);
+ document.getElementById("totalCoursesHero").innerText="200+";
+ fillAdmissionCourses();
+}
+
+function courseCardHTML(c,segment,index){
+ return `
+  <div class="course-card">
+    <img src="${courseImages[segment]}" alt="${c.name}">
+    <div class="course-content">
+      <h3>${c.name}</h3>
+      <div class="badge-row">
+        <span class="badge badge-green">Admission Open</span>
+        <span class="badge badge-red">Limited Seats</span>
+        <span class="badge badge-blue">${c.mode}</span>
+      </div>
+      <div class="course-meta">
+        <div class="meta-box"><b>Duration:</b><br>${c.duration}</div>
+        <div class="meta-box"><b>Eligibility:</b><br>${c.eligibility}</div>
+      </div>
+      <p><b>Career:</b> ${c.career}</p>
+      <ul class="detail-list">
+        <li>${c.details[0]}</li>
+        <li>${c.details[1]}</li>
+      </ul>
+      <button class="small-btn small-gold" onclick="showCourseDetail('${segment}',${index})">Full Detail</button>
+      <button class="small-btn small-green" onclick="directWhatsApp('${c.name}')">Ask Counsellor</button>
+    </div>
+  </div>`;
+}
+
+function showCourseDetail(segment,index){
+ const c=courseSegments[segment][index];
+ document.getElementById("modalCourseName").innerText=c.name + " - Full Course Detail";
+ document.getElementById("modalCourseBody").innerHTML=`
+  <p><b>Segment:</b> ${segment}</p>
+  <p><b>Duration:</b> ${c.duration}</p>
+  <p><b>Eligibility:</b> ${c.eligibility}</p>
+  <p><b>Education Mode:</b> ${c.mode}</p>
+  <p><b>Career Options:</b> ${c.career}</p>
+  <br>
+  <p><b>Course Details:</b></p>
+  <ul>${c.details.map(d=>`<li>${d}</li>`).join("")}</ul>
+  <br>
+  <p><b>Admission Status:</b> Admission Open, Limited Seats Available.</p>
+  <p><b>Office:</b> Jagatpura, Jaipur 302017, Rajasthan</p>
+  <br>
+  <button class="btn btn-green" onclick="directWhatsApp('${c.name}')">Ask on Ask Counsellor</button>
+ `;
+ document.getElementById("courseModal").style.display="flex";
+}
+
+function closeCourseModal(){
+ document.getElementById("courseModal").style.display="none";
+}
+
+function directWhatsApp(topic){
+ const msg=encodeURIComponent("Hello Global University Connect, I want free counselling for " + topic + ". Please guide me. Address: Jagatpura Jaipur 302017 Rajasthan.");
+ window.open("https://wa.me/" + whatsappNumber + "?text=" + msg, "_blank");
+}
+
+function openCourseSegments(){
+ currentSegment="All";
+ renderSegmentTabs();
+ renderCourses();
+ document.getElementById("courseSegments").scrollIntoView({behavior:"smooth"});
+}
+
+function openSegmentOnly(segment){
+ currentSegment=segment;
+ renderSegmentTabs();
+ renderCourses();
+ document.getElementById("courseSegments").scrollIntoView({behavior:"smooth"});
+}
+
+function fillAdmissionCourses(){
+ const select=document.getElementById("admissionCourseSelect");
+ if(select.dataset.filled==="yes") return;
+ Object.keys(courseSegments).forEach(segment=>{
+  courseSegments[segment].forEach(c=>{
+   select.innerHTML += `<option>${c.name}</option>`;
+  });
+ });
+ select.dataset.filled="yes";
+}
+
+function quickApply(name){
+ alert("Admission enquiry selected for: "+name+". Please fill the admission form below.");
+ document.getElementById("admission").scrollIntoView({behavior:"smooth"});
+}
+
+function submitCounselling(e){e.preventDefault();alert("Thank you! Your free counselling call request has been submitted.");e.target.reset();}
+function submitAdmission(e){e.preventDefault();alert("Admission form submitted successfully!");e.target.reset();}
+
+
+function googleUniversitySearch(){
+ const keyword=document.getElementById("keyword").value.trim();
+ const state=document.getElementById("stateFilter").value;
+ const type=document.getElementById("typeFilter").value;
+ const mode=document.getElementById("modeFilter").value;
+ let query=(keyword || "Indian universities admission") + " " + state + " " + type + " " + mode + " courses admission";
+ query=query.trim();
+ const url="https://www.google.com/search?q=" + encodeURIComponent(query);
+ const box=document.getElementById("googleResultBox");
+ if(box){
+   document.getElementById("googleResultText").innerText="Google results ready for: " + query + ". Click below to open live Google results.";
+   document.getElementById("googleResultLink").href=url;
+   box.style.display="block";
+ }
+ window.open(url,"_blank");
+}
+
+const onlineCourses = [
+ {name:"Online BBA",duration:"3 Years",eligibility:"10+2",detail:"Business administration course for management, entrepreneurship, marketing and corporate career.",streams:["General","Marketing","Finance","HR","International Business"]},
+ {name:"Online BCA",duration:"3 Years",eligibility:"10+2",detail:"Computer application course for coding, software, database, web development and IT career.",streams:["Programming","Web Development","Cloud","Data Science","Cyber Security"]},
+ {name:"Online BA",duration:"3 Years",eligibility:"10+2",detail:"Arts graduation course for humanities, civil services, teaching and content careers.",streams:["English","History","Political Science","Sociology","Psychology"]},
+ {name:"Online MA",duration:"2 Years",eligibility:"Graduation",detail:"Postgraduate arts course for teaching, research, writing and government exam preparation.",streams:["English","History","Political Science","Sociology","Psychology"]},
+ {name:"Online MBA",duration:"2 Years",eligibility:"Graduation",detail:"Management master course for business, leadership, finance, marketing and corporate roles.",streams:["Finance","Marketing","HR","Operations","Business Analytics","IT"]},
+ {name:"Online MCA",duration:"2 Years",eligibility:"Graduation/BCA",detail:"Advanced computer applications course for software, systems, database and IT leadership roles.",streams:["Software Development","AI","Cloud","Data Science","Cyber Security"]},
+ {name:"Online B.Sc",duration:"3 Years",eligibility:"10+2 Science",detail:"Science graduation course for scientific knowledge, analytics, research and technical fields.",streams:["IT","Maths","Computer Science","Data Science","General Science"]},
+ {name:"Online M.Sc",duration:"2 Years",eligibility:"Graduation",detail:"Postgraduate science course for specialization, research, teaching and technical career growth.",streams:["IT","Maths","Computer Science","Data Science","Physics"]},
+ {name:"Online B.Com",duration:"3 Years",eligibility:"10+2",detail:"Commerce graduation course for accounting, taxation, finance, banking and business career.",streams:["Accounting","Finance","Taxation","Banking","General"]},
+ {name:"Online M.Com",duration:"2 Years",eligibility:"Graduation/B.Com",detail:"Advanced commerce course for finance, accounting, teaching, banking and business roles.",streams:["Accounting","Finance","Taxation","Business Studies"]},
+ {name:"Online Diploma - All Streams",duration:"6 Months - 2 Years",eligibility:"10th/12th/Graduation",detail:"Skill-based diploma options for quick career growth, upskilling and job-oriented learning.",streams:["Digital Marketing","Computer Applications","Business Management","Fashion Design","Hotel Management","Data Entry","Graphic Design","Finance"]}
+];
+
+function renderOnlineCourses(){
+ const list=document.getElementById("onlineCourseList");
+ if(!list) return;
+ list.innerHTML="";
+ onlineCourses.forEach(c=>{
+  list.innerHTML += `
+   <div class="online-course-card">
+    <h3>${c.name}</h3>
+    <p><b>Duration:</b> ${c.duration}</p>
+    <p><b>Eligibility:</b> ${c.eligibility}</p>
+    <p>${c.detail}</p>
+    <div class="online-streams">${c.streams.map(s=>`<span>${s}</span>`).join("")}</div>
+    <br>
+    <button class="btn btn-gold" onclick="openOnlineCourseDetail('${c.name}')">Click to Open</button>
+    <button class="btn btn-green" onclick="directWhatsApp('${c.name}')">Ask Counsellor</button>
+   </div>`;
+ });
+}
+
+function openOnlineCourseDetail(courseName){
+ const c=onlineCourses.find(x=>x.name===courseName);
+ document.getElementById("modalCourseName").innerText=c.name + " - Online Course Detail";
+ document.getElementById("modalCourseBody").innerHTML=`
+  <p><b>Course:</b> ${c.name}</p>
+  <p><b>Duration:</b> ${c.duration}</p>
+  <p><b>Eligibility:</b> ${c.eligibility}</p>
+  <p><b>Mode:</b> Online Education</p>
+  <br>
+  <p><b>Full Description:</b></p>
+  <ul>
+    <li>${c.detail}</li>
+    <li>Students can study with flexible timing, online lectures, digital study material and counselling support.</li>
+    <li>This course is useful for students, working professionals and learners who cannot attend regular campus classes.</li>
+    <li>Admission guidance, university selection and form support are available through Global University Connect.</li>
+  </ul>
+  <br>
+  <p><b>Available Streams:</b></p>
+  <ul>${c.streams.map(s=>`<li>${s}</li>`).join("")}</ul>
+  <br>
+  <p><b>Contact:</b> +91 9351401624 | globaluniversityconnectin@gmail.com</p>
+  <p><b>Address:</b> Jagatpura, Jaipur 302017, Rajasthan</p>
+  <br>
+  <button class="btn btn-gold" onclick="document.getElementById('admission').scrollIntoView({behavior:'smooth'})">Apply for Online Course</button>
+ `;
+ document.getElementById("courseModal").style.display="flex";
+}
+
+
+fillStateFilter();
+displayUniversities();
+renderSegmentTabs();
+renderCourses();
+renderOnlineCourses();
+
+
+</script>
+</body>
+</html>
